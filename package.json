@@ -14,11 +14,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vee-validate/rules": "^4.12.2",
     "autoprefixer": "^10.4.16",
     "pinia": "^2.1.7",
     "postcss": "^8.4.32",
     "sass": "^1.69.5",
     "tailwindcss": "^3.3.6",
+    "vee-validate": "^4.12.2",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5"
   },
@@ -27,6 +29,7 @@
     "@vitejs/plugin-vue": "^4.5.1",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/test-utils": "^2.4.3",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "cypress": "^13.6.1",
     "eslint": "^8.49.0",
     "eslint-plugin-cypress": "^2.15.1",

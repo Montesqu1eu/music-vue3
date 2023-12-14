@@ -22,19 +22,19 @@
   </header>
 </template>
 <script>
-import { mapStores } from 'pinia';
 import useModalStore from '@/stores/modal';
+import { mapStores } from 'pinia';
 
 export default {
   name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore)
+    ...mapStores(useModalStore),
   },
   methods: {
     toggleAuthModal() {
       this.modalStore.isOpen = !this.modalStore.isOpen;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss"></style>

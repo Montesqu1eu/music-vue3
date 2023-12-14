@@ -269,15 +269,15 @@
   <AuthModal />
 </template>
 <script>
-import AppHeader from '@/components/AppHeader.vue'
-import AuthModal from '@/components/modals/AuthModal.vue'
+import AppHeader from '@/components/AppHeader.vue';
+import AuthModal from '@/components/modals/AuthModal.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AuthModal
-  }
-}
+    AuthModal,
+  },
+};
 </script>
 <style scoped lang="scss"></style>
