@@ -104,6 +104,8 @@
 </template>
 
 <script>
+import { auth, usersCollection } from '@/includes/firebase';
+
 export default {
   name: 'RegForm',
   data() {
@@ -112,7 +114,7 @@ export default {
         name: 'required|min:3|max:20|alphaSpaces',
         email: 'required|min:3|max:50|email',
         age: 'required|minValue:18|maxValue:100',
-        password: 'required|min:9|max:50|excluded:password',
+        password: 'required|min:6|max:50|excluded:password',
         confirmPassword: 'passwordsMismatch:@password',
         country: 'required|countryExcluded:Antarctica',
         tos: 'tos',
@@ -127,15 +129,40 @@ export default {
     };
   },
   methods: {
-    register(values) {
+    async register(values) {
       this.regShowAlert = true;
       this.regInSubmission = true;
       this.regAlertVariant = 'bg-blue-500';
       this.regAlertMsg = 'Please wait! Your account is being created.';
 
+      let userCreds = null;
+
+      try {
+        userCreds = await auth.createUserWithEmailAndPassword(values.email, values.password);
+      } catch (error) {
+        this.regInSubmission = false;
+        this.regAlertVariant = 'bg-red-500';
+        this.regAlertMsg = 'An unexpected error. Please try again!';
+        return;
+      }
+
+      try {
+        usersCollection.add({
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          country: values.country,
+        });
+      } catch (error) {
+        this.regInSubmission = false;
+        this.regAlertVariant = 'bg-red-500';
+        this.regAlertMsg = 'An unexpected error. Please try again!';
+        return;
+      }
+
       this.regAlertVariant = 'bg-green-500';
       this.regAlertMsg = 'Success! Your account has been created.';
-      console.log(values);
+      console.log(userCreds);
     },
   },
 };
