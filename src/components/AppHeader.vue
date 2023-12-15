@@ -8,33 +8,39 @@
         <!-- Primary Navigation -->
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
-          <li>
+          <li v-if="!userStore.userLoggedIn">
             <a @click.prevent="toggleAuthModal" href="#" class="px-2 text-white">
               Login / Register
             </a>
           </li>
-          <li>
-            <a class="px-2 text-white" href="#">Manage</a>
-          </li>
+          <template v-else>
+            <li>
+              <a class="px-2 text-white" href="#">Manage</a>
+            </li>
+            <li>
+              <a @click.prevent="userStore.signOut" class="px-2 text-white" href="#">Logout</a>
+            </li>
+          </template>
         </ul>
       </div>
     </nav>
   </header>
 </template>
 <script>
-import { mapStores } from 'pinia';
 import useModalStore from '@/stores/modal';
+import { mapStores } from 'pinia';
+import useUserStore from '@/stores/user';
 
 export default {
   name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore)
+    ...mapStores(useModalStore, useUserStore),
   },
   methods: {
     toggleAuthModal() {
       this.modalStore.isOpen = !this.modalStore.isOpen;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss"></style>

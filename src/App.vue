@@ -269,15 +269,27 @@
   <AuthModal />
 </template>
 <script>
-import AppHeader from '@/components/AppHeader.vue'
-import AuthModal from '@/components/modals/AuthModal.vue'
+import { mapWritableState } from 'pinia';
+import useUserStore from '@/stores/user';
+import { auth } from './includes/firebase';
+
+import AppHeader from '@/components/AppHeader.vue';
+import AuthModal from '@/components/modals/AuthModal.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AuthModal
-  }
-}
+    AuthModal,
+  },
+  computed: {
+    ...mapWritableState(useUserStore, ['userLoggedIn']),
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userLoggedIn = true;
+    }
+  },
+};
 </script>
 <style scoped lang="scss"></style>
