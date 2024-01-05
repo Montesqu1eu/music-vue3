@@ -6,7 +6,11 @@
   >
     {{ regAlertMsg }}
   </div>
-  <VeeForm @submit="register" :validationSchema="schema" :initialValues="userData">
+  <VeeForm
+    @submit="register"
+    :validationSchema="schema"
+    :initialValues="userData"
+  >
     <!-- Name -->
     <div class="mb-3">
       <label class="inline-block mb-2">Name</label>
@@ -16,7 +20,12 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Enter Name"
       />
-      <ErrorMessage name="name" class="text-red-600" as="div" v-slot="{ message }">
+      <ErrorMessage
+        name="name"
+        class="text-red-600"
+        as="div"
+        v-slot="{ message }"
+      >
         <p>Error: {{ message }}</p>
       </ErrorMessage>
     </div>
@@ -129,7 +138,6 @@ export default {
       regAlertMsg: 'Please wait! Your account is being created.',
     };
   },
-  computed: {},
   methods: {
     ...mapActions(useUserStore, {
       createUser: 'register',

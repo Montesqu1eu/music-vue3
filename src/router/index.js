@@ -16,11 +16,6 @@ const routes = [
     name: 'manage',
     path: '/manage',
     component: () => import('@/views/ManagePage.vue'),
-    beforeEnter: (to, from, next) => {
-      console.log('Manage guard');
-
-      next();
-    },
     meta: {
       requiresAuth: true,
     },
